@@ -1,12 +1,1051 @@
 <!DOCTYPE html>
 <html lang="pl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interiq</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interiq | Rozwiązania cyfrowe na zamówienie</title>
+  <meta name="description" content="Interiq - strony internetowe, sklepy, automatyzacje, Python, AI, Base44, UX/UI i rozwiązania cyfrowe na zamówienie." />
+
+  <style>
+    :root {
+      --bg: #070B18;
+      --bg-soft: #0B1024;
+      --card: #11182E;
+      --card-2: #0E1529;
+      --blue: #2563EB;
+      --cyan: #38BDF8;
+      --violet: #7C3AED;
+      --gold: #D6B25E;
+      --text: #F8FAFC;
+      --muted: #A7B0C0;
+      --border: #24304A;
+      --shadow: rgba(56, 189, 248, 0.18);
+      --max: 1220px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        radial-gradient(circle at 12% 22%, rgba(124, 58, 237, 0.24), transparent 30%),
+        radial-gradient(circle at 88% 18%, rgba(37, 99, 235, 0.20), transparent 28%),
+        radial-gradient(circle at 50% 80%, rgba(56, 189, 248, 0.10), transparent 32%),
+        var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9), rgba(0,0,0,0.2));
+      z-index: -1;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      border-bottom: 1px solid rgba(36, 48, 74, 0.65);
+      background: rgba(7, 11, 24, 0.82);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav {
+      height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 800;
+      font-size: 1.18rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-mark {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #1E1B8F, #312EBC);
+      box-shadow: 0 0 32px rgba(56, 189, 248, 0.18);
+      font-weight: 900;
+      letter-spacing: -0.08em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 34px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .nav-links a:hover {
+      color: var(--text);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 24px;
+      border-radius: 13px;
+      border: 1px solid transparent;
+      font-weight: 800;
+      transition: 0.2s ease;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--blue), #2F74FF);
+      color: white;
+      box-shadow: 0 12px 40px rgba(37, 99, 235, 0.25);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 48px rgba(37, 99, 235, 0.38);
+    }
+
+    .btn-secondary {
+      border-color: var(--border);
+      background: rgba(17, 24, 46, 0.7);
+      color: #D8E3F8;
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(56, 189, 248, 0.55);
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      padding: 88px 0 58px;
+      min-height: calc(100vh - 72px);
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+      gap: 70px;
+      align-items: center;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      color: var(--cyan);
+      font-size: 0.75rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 20px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--cyan);
+      box-shadow: 0 0 20px var(--cyan);
+    }
+
+    h1 {
+      max-width: 760px;
+      font-size: clamp(2.55rem, 5vw, 5rem);
+      line-height: 1.08;
+      letter-spacing: -0.065em;
+      margin-bottom: 26px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(90deg, var(--cyan), var(--blue), var(--violet));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero p {
+      max-width: 650px;
+      color: #C8D5EA;
+      font-size: 1.08rem;
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 34px;
+    }
+
+    .quick-label {
+      color: rgba(167, 176, 192, 0.55);
+      font-size: 0.72rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      margin-bottom: 12px;
+    }
+
+    .quick-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      max-width: 620px;
+    }
+
+    .pill {
+      border: 1px solid var(--border);
+      background: rgba(14, 21, 41, 0.62);
+      color: #DCE7FA;
+      padding: 8px 15px;
+      border-radius: 999px;
+      font-size: 0.88rem;
+      transition: 0.2s ease;
+    }
+
+    .pill:hover {
+      border-color: rgba(56, 189, 248, 0.65);
+      background: rgba(37, 99, 235, 0.14);
+      transform: translateY(-1px);
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 420px;
+      border: 1px solid rgba(36, 48, 74, 0.8);
+      border-radius: 26px;
+      background:
+        radial-gradient(circle at 50% 20%, rgba(56, 189, 248, 0.22), transparent 34%),
+        radial-gradient(circle at 80% 70%, rgba(124, 58, 237, 0.26), transparent 30%),
+        linear-gradient(135deg, rgba(17, 24, 46, 0.92), rgba(7, 11, 24, 0.84));
+      box-shadow: 0 0 0 8px rgba(17, 24, 46, 0.32), 0 30px 90px rgba(0, 0, 0, 0.35);
+      overflow: hidden;
+    }
+
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      inset: 22px;
+      border-radius: 20px;
+      border: 1px solid rgba(56, 189, 248, 0.18);
+      background:
+        linear-gradient(90deg, transparent, rgba(56, 189, 248, 0.08), transparent),
+        radial-gradient(circle at 55% 50%, rgba(56, 189, 248, 0.15), transparent 24%);
+    }
+
+    .orbit {
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      border: 1px dashed rgba(56, 189, 248, 0.28);
+      top: 82px;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: spin 24s linear infinite;
+    }
+
+    .node {
+      position: absolute;
+      width: 72px;
+      height: 72px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      background: rgba(17, 24, 46, 0.92);
+      border: 1px solid rgba(56, 189, 248, 0.26);
+      box-shadow: 0 0 28px rgba(56, 189, 248, 0.13);
+      color: var(--cyan);
+      font-weight: 900;
+    }
+
+    .node-main {
+      width: 140px;
+      height: 92px;
+      top: 165px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 1.2rem;
+      background: linear-gradient(135deg, rgba(37,99,235,0.42), rgba(124,58,237,0.28));
+    }
+
+    .node-1 { top: 65px; left: 70px; }
+    .node-2 { top: 75px; right: 64px; }
+    .node-3 { bottom: 64px; left: 92px; }
+    .node-4 { bottom: 74px; right: 84px; }
+
+    .visual-tag {
+      position: absolute;
+      left: 28px;
+      bottom: 26px;
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(56, 189, 248, 0.26);
+      background: rgba(7, 11, 24, 0.66);
+      color: #C8D5EA;
+      font-size: 0.86rem;
+    }
+
+    @keyframes spin {
+      to { transform: translateX(-50%) rotate(360deg); }
+    }
+
+    section {
+      padding: 86px 0;
+    }
+
+    .section-head {
+      text-align: center;
+      max-width: 820px;
+      margin: 0 auto 48px;
+    }
+
+    .section-kicker {
+      color: var(--cyan);
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 0.78rem;
+      margin-bottom: 12px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.7rem);
+      line-height: 1.08;
+      letter-spacing: -0.055em;
+      margin-bottom: 16px;
+    }
+
+    .section-head p {
+      color: #C2CDE0;
+      font-size: 1.05rem;
+    }
+
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      position: relative;
+      min-height: 260px;
+      padding: 26px;
+      border-radius: 18px;
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(17, 24, 46, 0.92), rgba(14, 21, 41, 0.84));
+      overflow: hidden;
+      transition: 0.22s ease;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--cyan), var(--blue), var(--violet));
+      opacity: 0.65;
+      transform: scaleX(0.22);
+      transform-origin: left;
+      transition: 0.22s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(56, 189, 248, 0.55);
+      box-shadow: 0 20px 55px rgba(0,0,0,0.25), 0 0 32px var(--shadow);
+    }
+
+    .card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .card-id {
+      position: absolute;
+      top: 20px;
+      right: 22px;
+      color: rgba(167,176,192,0.12);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.8rem;
+    }
+
+    .icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      background: rgba(56, 189, 248, 0.09);
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      color: var(--cyan);
+      font-weight: 900;
+    }
+
+    .card h3 {
+      font-size: 1.12rem;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.96rem;
+      margin-bottom: 22px;
+    }
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+    }
+
+    .tag {
+      border: 1px solid var(--border);
+      color: #C5D0E3;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 0.72rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .project-card {
+      min-height: 280px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .project-type {
+      color: var(--cyan);
+      font-size: 0.74rem;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      margin-bottom: 18px;
+    }
+
+    .project-card .scope {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(36, 48, 74, 0.75);
+      color: #C7D3E8;
+      font-size: 0.9rem;
+    }
+
+    .process {
+      background: linear-gradient(180deg, rgba(11, 16, 36, 0.45), rgba(124, 58, 237, 0.10), rgba(11, 16, 36, 0.45));
+      border-top: 1px solid rgba(36, 48, 74, 0.4);
+      border-bottom: 1px solid rgba(36, 48, 74, 0.4);
+    }
+
+    .process-row {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 14px;
+    }
+
+    .step {
+      text-align: center;
+      position: relative;
+      padding: 10px;
+    }
+
+    .step-num {
+      width: 54px;
+      height: 54px;
+      margin: 0 auto 18px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      border: 1px solid var(--border);
+      background: rgba(7, 11, 24, 0.72);
+      color: var(--gold);
+      font-weight: 900;
+    }
+
+    .step h3 {
+      font-size: 1rem;
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      color: #C2CDE0;
+      font-size: 0.9rem;
+    }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .note {
+      margin-top: 22px;
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--gold);
+      border-radius: 14px;
+      padding: 22px 24px;
+      color: #C4CFE2;
+      background: rgba(17, 24, 46, 0.62);
+    }
+
+    .cta {
+      text-align: center;
+      padding-bottom: 70px;
+    }
+
+    .cta p {
+      max-width: 690px;
+      margin: 0 auto 26px;
+      color: #C2CDE0;
+      font-size: 1.03rem;
+    }
+
+    .footer {
+      border-top: 1px solid rgba(36, 48, 74, 0.65);
+      background: rgba(5, 8, 18, 0.62);
+      padding: 30px 0;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 0.88rem;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 20px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-weight: 800;
+      font-size: 0.76rem;
+    }
+
+    @media (max-width: 1100px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-visual {
+        min-height: 330px;
+      }
+
+      .cards-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .projects-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .why-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .process-row {
+        grid-template-columns: 1fr;
+        max-width: 680px;
+        margin: 0 auto;
+      }
+
+      .step {
+        text-align: left;
+        display: grid;
+        grid-template-columns: 70px 1fr;
+        gap: 16px;
+        align-items: start;
+      }
+
+      .step-num {
+        margin: 0;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .container {
+        width: min(100% - 28px, var(--max));
+      }
+
+      .nav {
+        height: auto;
+        padding: 16px 0;
+        align-items: flex-start;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .nav .btn {
+        display: none;
+      }
+
+      .hero {
+        padding: 56px 0 44px;
+      }
+
+      h1 {
+        font-size: clamp(2.35rem, 12vw, 3.7rem);
+        line-height: 1.08;
+        margin-bottom: 22px;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+
+      .hero-visual {
+        min-height: 260px;
+      }
+
+      .node {
+        transform: scale(0.78);
+      }
+
+      .node-main {
+        left: 50%;
+        transform: translateX(-50%) scale(0.82);
+      }
+
+      section {
+        padding: 62px 0;
+      }
+
+      .cards-grid,
+      .projects-grid,
+      .why-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .card {
+        min-height: auto;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
 </head>
+
 <body>
-  <h1>Interiq</h1>
-  <p>Strona testowa działa.</p>
+  <header class="site-header">
+    <div class="container nav">
+      <a class="brand" href="#start" aria-label="Interiq">
+        <span class="brand-mark">IQ</span>
+        <span>Interiq</span>
+      </a>
+
+      <nav class="nav-links" aria-label="Menu główne">
+        <a href="#start">Start</a>
+        <a href="#uslugi">Usługi</a>
+        <a href="#projekty">Projekty</a>
+        <a href="#o-mnie">O mnie</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+
+      <a class="btn btn-primary" href="#uslugi">Zobacz usługi</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="start">
+      <div class="container hero-grid">
+        <div>
+          <div class="eyebrow">Interiq</div>
+          <h1>Jestem Stefan i jako Interiq tworzę <span class="gradient-text">rozwiązania cyfrowe na zamówienie</span></h1>
+          <p>Projektuję i wdrażam strony internetowe, sklepy, automatyzacje, integracje, narzędzia Python, rozwiązania AI oraz prototypy aplikacji. Pomagam zamienić pomysł lub problem techniczny w gotowe, działające rozwiązanie.</p>
+
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#uslugi">Zobacz usługi</a>
+            <a class="btn btn-secondary" href="#projekty">Zobacz projekty →</a>
+          </div>
+
+          <div class="quick-label">Wybierz obszar usług</div>
+          <div class="quick-links">
+            <a class="pill" href="#uslugi">Strony www</a>
+            <a class="pill" href="#uslugi">E-commerce</a>
+            <a class="pill" href="#uslugi">Automatyzacje</a>
+            <a class="pill" href="#uslugi">Python / IT</a>
+            <a class="pill" href="#uslugi">AI / Base44</a>
+            <a class="pill" href="#uslugi">Figma / UX/UI</a>
+          </div>
+        </div>
+
+        <div class="hero-visual" aria-label="Grafika technologiczna">
+          <div class="orbit"></div>
+          <div class="node node-main">API</div>
+          <div class="node node-1">WWW</div>
+          <div class="node node-2">AI</div>
+          <div class="node node-3">PY</div>
+          <div class="node node-4">UX</div>
+          <div class="visual-tag">Rozwiązania IT i digital</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="uslugi">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Oferta</div>
+          <h2>Wybierz obszar, którego potrzebujesz</h2>
+          <p>Interiq pomaga w zakresie stron, sklepów, automatyzacji, narzędzi IT, prototypów AI, projektowania UX/UI i technicznego wsparcia marketingu.</p>
+        </div>
+
+        <div class="cards-grid">
+          <a class="card" href="#kontakt">
+            <span class="card-id">ID:001</span>
+            <div class="icon">◎</div>
+            <h3>Strony internetowe</h3>
+            <p>Strony firmowe, landing page, WordPress, portale, poprawki techniczne, responsywność i optymalizacja.</p>
+            <div class="tags"><span class="tag">WordPress</span><span class="tag">HTML/CSS</span><span class="tag">PHP</span><span class="tag">SEO techniczne</span></div>
+          </a>
+
+          <a class="card" href="#kontakt">
+            <span class="card-id">ID:002</span>
+            <div class="icon">▱</div>
+            <h3>Sklepy i e-commerce</h3>
+            <p>Shopify, WooCommerce, Shoper, PrestaShop, konfiguracja produktów, integracje sprzedażowe, TikTok Shop, BaseLinker i Merchant Center.</p>
+            <div class="tags"><span class="tag">Shopify</span><span class="tag">WooCommerce</span><span class="tag">BaseLinker</span><span class="tag">TikTok Shop</span></div>
+          </a>
+
+          <a class="card" href="#kontakt">
+            <span class="card-id">ID:003</span>
+            <div class="icon">⌬</div>
+            <h3>Automatyzacje firmowe</h3>
+            <p>Automatyzacja procesów, przepływy danych między narzędziami, formularze, powiadomienia, CRM, ERP i integracje systemów.</p>
+            <div class="tags"><span class="tag">Make</span><span class="tag">Zapier</span><span class="tag">n8n</span><span class="tag">API</span></div>
+          </a>
+
+          <a class="card" href="#kontakt">
+            <span class="card-id">ID:004</span>
+            <div class="icon">&gt;_</div>
+            <h3>Narzędzia IT i Python</h3>
+            <p>Skrypty, raporty, dashboardy, web scraping, przetwarzanie danych, boty i dedykowane narzędzia wewnętrzne.</p>
+            <div class="tags"><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">API</span><span class="tag">Data</span></div>
+          </a>
+
+          <a class="card" href="#kontakt">
+            <span class="card-id">ID:005</span>
+            <div class="icon">AI</div>
+            <h3>AI, chatboty i Base44</h3>
+            <p>Prototypy aplikacji, narzędzia AI, chatboty, automatyzacje z AI, OpenAI API, ChatGPT i rozwiązania Base44.</p>
+            <div class="tags"><span class="tag">Base44</span><span class="tag">OpenAI</span><span class="tag">ChatGPT</span><span class="tag">AI</span></div>
+          </a>
+
+          <a class="card" href="#kontakt">
+            <span class="card-id">ID:006</span>
+            <div class="icon">UI</div>
+            <h3>UX/UI i Figma</h3>
+            <p>Wireframy, projekty ekranów, redesigny, prototypy, interfejsy aplikacji i layouty gotowe do wdrożenia.</p>
+            <div class="tags"><span class="tag">Figma</span><span class="tag">UX/UI</span><span class="tag">Prototypy</span><span class="tag">Redesign</span></div>
+          </a>
+
+          <a class="card" href="#kontakt">
+            <span class="card-id">ID:007</span>
+            <div class="icon">▥</div>
+            <h3>Marketing techniczny</h3>
+            <p>Konfiguracja narzędzi marketingowych, analityka, tracking, Pixel, Google Analytics, Merchant Center, SEO i wsparcie kampanii.</p>
+            <div class="tags"><span class="tag">GA4</span><span class="tag">Pixel</span><span class="tag">SEO</span><span class="tag">Ads</span></div>
+          </a>
+
+          <a class="card" href="#kontakt">
+            <span class="card-id">ID:008</span>
+            <div class="icon">文</div>
+            <h3>Treści i projekty wielojęzyczne</h3>
+            <p>Treści na strony, opisy produktów e-commerce, content SEO i wsparcie projektów wielojęzycznych.</p>
+            <div class="tags"><span class="tag">PL</span><span class="tag">EN</span><span class="tag">FR</span><span class="tag">SE</span></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="projekty">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Portfolio</div>
+          <h2>Wybrane kierunki projektów</h2>
+          <p>Anonimowe przykłady realizacji i obszarów pracy — różne potrzeby, różne technologie, wspólny cel: konkretne rozwiązanie.</p>
+        </div>
+
+        <div class="projects-grid">
+          <article class="card project-card">
+            <div>
+              <div class="project-type">UX/UI design</div>
+              <h3>Projekt aplikacji mobilnej w Figma</h3>
+              <p>Projekt dotyczył przygotowania kompletnego interfejsu aplikacji mobilnej — od struktury widoków po gotowe ekrany.</p>
+            </div>
+            <div>
+              <div class="scope">Zakres: 29 ekranów, system designu, prototyp interaktywny.</div>
+              <div class="tags"><span class="tag">Figma</span><span class="tag">UX/UI</span><span class="tag">Prototyp</span></div>
+            </div>
+          </article>
+
+          <article class="card project-card">
+            <div>
+              <div class="project-type">E-commerce</div>
+              <h3>Konfiguracja Shopify + TikTok Shop</h3>
+              <p>Zakres obejmował konfigurację sklepu, połączenie kanału sprzedaży i analizę działania integracji.</p>
+            </div>
+            <div>
+              <div class="scope">Zakres: Shopify, produkty, TikTok Shop, Merchant Center.</div>
+              <div class="tags"><span class="tag">Shopify</span><span class="tag">TikTok Shop</span><span class="tag">E-commerce</span></div>
+            </div>
+          </article>
+
+          <article class="card project-card">
+            <div>
+              <div class="project-type">Strona internetowa</div>
+              <h3>Poprawki mobilne WordPress</h3>
+              <p>Projekt dotyczył poprawy działania strony na telefonach, układu sekcji i czytelności widoków mobilnych.</p>
+            </div>
+            <div>
+              <div class="scope">Zakres: audyt mobile, CSS, poprawki layoutu, optymalizacja.</div>
+              <div class="tags"><span class="tag">WordPress</span><span class="tag">CSS</span><span class="tag">Mobile</span></div>
+            </div>
+          </article>
+
+          <article class="card project-card">
+            <div>
+              <div class="project-type">Automatyzacja</div>
+              <h3>Automatyzacja procesów w Make</h3>
+              <p>Przykładowy kierunek pracy: ograniczenie ręcznego przenoszenia danych między narzędziami.</p>
+            </div>
+            <div>
+              <div class="scope">Zakres: scenariusze Make, API, powiadomienia, przepływ danych.</div>
+              <div class="tags"><span class="tag">Make</span><span class="tag">API</span><span class="tag">Webhooki</span></div>
+            </div>
+          </article>
+
+          <article class="card project-card">
+            <div>
+              <div class="project-type">Python</div>
+              <h3>Narzędzie Python do przetwarzania danych</h3>
+              <p>Projekt typu: skrypt do porządkowania, przeliczania lub eksportu danych z plików i systemów.</p>
+            </div>
+            <div>
+              <div class="scope">Zakres: Python, CSV, raporty, eksport do Excela.</div>
+              <div class="tags"><span class="tag">Python</span><span class="tag">Pandas</span><span class="tag">Data</span></div>
+            </div>
+          </article>
+
+          <article class="card project-card">
+            <div>
+              <div class="project-type">AI / Base44</div>
+              <h3>Prototyp aplikacji w Base44</h3>
+              <p>Przykładowy kierunek: szybkie przygotowanie prototypu aplikacji webowej lub panelu do dalszej weryfikacji.</p>
+            </div>
+            <div>
+              <div class="scope">Zakres: prototyp MVP, logika widoków, struktura aplikacji.</div>
+              <div class="tags"><span class="tag">Base44</span><span class="tag">AI</span><span class="tag">MVP</span></div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="process" id="proces">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Proces</div>
+          <h2>Jak wygląda współpraca</h2>
+        </div>
+
+        <div class="process-row">
+          <div class="step">
+            <div class="step-num">01</div>
+            <div>
+              <h3>Analiza potrzeb</h3>
+              <p>Poznaję projekt, cel i wymagania. Ustalamy zakres oraz priorytety.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">02</div>
+            <div>
+              <h3>Propozycja rozwiązania</h3>
+              <p>Przygotowuję opis rozwiązania, zakres, technologię i sposób realizacji.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">03</div>
+            <div>
+              <h3>Realizacja</h3>
+              <p>Projekt lub wdrożenie prowadzę etapami, z możliwością zgłaszania uwag.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">04</div>
+            <div>
+              <h3>Testy i poprawki</h3>
+              <p>Sprawdzam działanie, responsywność, czytelność i podstawowe scenariusze.</p>
+            </div>
+          </div>
+
+          <div class="step">
+            <div class="step-num">05</div>
+            <div>
+              <h3>Finalne przekazanie</h3>
+              <p>Przekazuję gotowe rozwiązanie oraz krótkie podsumowanie wykonanych prac.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="o-mnie">
+      <div class="container">
+        <div class="section-head">
+          <div class="section-kicker">Dlaczego Interiq</div>
+          <h2>Profesjonalne podejście do każdego projektu</h2>
+        </div>
+
+        <div class="why-grid">
+          <div class="card">
+            <div class="icon">01</div>
+            <h3>Indywidualne podejście</h3>
+            <p>Każdy projekt traktuję jako konkretne zadanie do rozwiązania, a nie jako gotowy szablon do powielenia.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">02</div>
+            <h3>Połączenie designu i technologii</h3>
+            <p>Łączę wygląd, strukturę i wdrożenie techniczne, aby projekt był estetyczny i praktyczny.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">03</div>
+            <h3>Szerokie doświadczenie</h3>
+            <p>Pracuję przy stronach, e-commerce, automatyzacjach, Pythonie, AI, Base44 oraz projektach Figma.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">04</div>
+            <h3>Jasna komunikacja</h3>
+            <p>Wyjaśniam zakres i rozwiązania prostym językiem, bez niepotrzebnego żargonu technicznego.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">05</div>
+            <h3>Elastyczne kanały współpracy</h3>
+            <p>Kontakt może odbywać się bezpośrednio lub przez portal freelancerski, z którego trafiłeś na stronę.</p>
+          </div>
+
+          <div class="card">
+            <div class="icon">IQ</div>
+            <h3>Praca na zamówienie</h3>
+            <p>Zakres dopasowuję do realnego problemu: od małych poprawek po pełniejsze wdrożenia i prototypy.</p>
+          </div>
+        </div>
+
+        <div class="note">
+          Interiq to marka, pod którą realizuję projekty cyfrowe: strony, sklepy, automatyzacje, narzędzia IT, rozwiązania AI i projekty UX/UI.
+        </div>
+      </div>
+    </section>
+
+    <section class="cta" id="kontakt">
+      <div class="container">
+        <div class="section-kicker">Następny krok</div>
+        <h2>Porozmawiajmy o Twoim projekcie</h2>
+        <p>Wybierz wygodną formę kontaktu. Jeśli trafiłeś tutaj z portalu freelancerskiego, możesz kontynuować rozmowę na tej platformie. W przypadku zapytań bezpośrednich możesz napisać wiadomość e-mail.</p>
+
+        <div class="hero-actions" style="justify-content:center;">
+          <a class="btn btn-primary" href="mailto:infointeriq@proton.me">Napisz e-mail</a>
+          <a class="btn btn-secondary" href="#start">Kontynuuj przez platformę</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <a class="brand" href="#start">
+        <span class="brand-mark">IQ</span>
+        <span>Interiq</span>
+      </a>
+
+      <div class="footer-links">
+        <a href="#start">Start</a>
+        <a href="#uslugi">Usługi</a>
+        <a href="#projekty">Projekty</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+
+      <div>© 2026 Interiq. Wszelkie prawa zastrzeżone.</div>
+    </div>
+  </footer>
 </body>
 </html>
